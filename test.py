@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud
 
+# 设置 matplotlib 的字体
+plt.rcParams['font.sans-serif'] = ['simhei']  # 指定默认字体
+plt.rcParams['axes.unicode_minus'] = False  # 解决保存图像时负号'-'显示为方块的问题
+
 # 设置中文字体
 font_path = 'simhei.ttf'
 
