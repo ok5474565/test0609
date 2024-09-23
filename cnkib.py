@@ -94,7 +94,7 @@ def st_echarts(options, height):
         myChart.setOption(option);
     </script>
     """
-    st.components.v1.html(echarts_js, height=f"{height}px")
+    st.components.html(echarts_js, height=f"{height}px")
 
 if __name__ == '__main__':
     main()
