@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from collections import Counter
 import re
-import json
+import streamlit_echarts
 
 # 读取TXT文件
 def read_keywords(file_content):
@@ -85,16 +85,8 @@ def plot_bar_chart(top_keywords):
     st_echarts(options)
 
 def st_echarts(options):
-    echarts_js = f"""
-    <div id="chart" style="height: 600px; width: 100%;"></div>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
-    <script>
-        var myChart = echarts.init(document.getElementById('chart'));
-        var option = {json.dumps(options)};
-        myChart.setOption(option);
-    </script>
-    """
-    st.write(echarts_js, dangerously_allow_html=True)
+    # 使用 streamlit-echarts 组件
+    streamlit_echarts.st_echarts(options=options, height="600px")
 
 if __name__ == '__main__':
     main()
