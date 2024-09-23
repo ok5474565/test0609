@@ -82,10 +82,19 @@ def plot_bar_chart(top_keywords):
             "data": [item["value"] for item in data]
         }]
     }
-    st_echarts(options=data, height="600px")
+    st_echarts(options, "600px")
 
-def st_echarts(options, height=None):
-    st._legacy_charts.echarts(options, height=height)
+def st_echarts(options, height):
+    echarts_js = """
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
+    <div id="chart" style="height: {height}; width: 100%;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('chart'));
+        var option = {options};
+        myChart.setOption(option);
+    </script>
+    """.replace("{options}", json.dumps(options)).replace("{height}", height)
+    st.components.v1.html(echarts_js, height=height)
 
 if __name__ == '__main__':
     main()
