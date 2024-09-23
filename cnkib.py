@@ -63,23 +63,31 @@ def plot_bar_chart(top_keywords):
     data = [{"name": keyword, "value": count} for keyword, count in top_keywords]
     options = {
         "title": {
-            "text": "Top Keywords Bar Chart"
+            "text": "Top Keywords Bar Chart",
+            "subtext": "Hover to see full keyword",
+            "left": "center"
         },
         "tooltip": {},
         "legend": {
-            "data": ["Frequency"]
+            "data": ["Frequency"],
+            "top": "bottom"
         },
         "xAxis": {
             "data": [item["name"] for item in data],
             "axisLabel": {
-                "rotate": 45
+                "rotate": 45,  # Rotate the labels
+                "interval": 0  # Show all labels
             }
         },
         "yAxis": {},
         "series": [{
             "name": "Frequency",
             "type": "bar",
-            "data": [item["value"] for item in data]
+            "data": [item["value"] for item in data],
+            "label": {
+                "show": true,
+                "position": "top"
+            }
         }]
     }
     st_echarts(options)
