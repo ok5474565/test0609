@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from collections import Counter
 import re
+import json
 import streamlit_echarts
 
 # 读取TXT文件
@@ -88,13 +89,15 @@ def plot_bar_chart(top_keywords):
                 "show": True,
                 "position": "insideTop"
             }
-        }]
+        }],
+        "width": "1600px",  # Set the width of the chart
+        "height": "1200px"  # Set the height of the chart
     }
     st_echarts(options)
 
 def st_echarts(options):
     # 使用 streamlit-echarts 组件
-    streamlit_echarts.st_echarts(options=options, height="600px")
+    streamlit_echarts.st_echarts(options=options)
 
 if __name__ == '__main__':
     main()
