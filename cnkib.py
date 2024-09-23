@@ -20,7 +20,7 @@ def get_top_keywords(keywords, top_n):
 # 生成词云图
 def generate_wordcloud(top_keywords, font_path):
     from wordcloud import WordCloud
-    from matplotlib import pyplot as plt
+    import matplotlib.pyplot as plt
 
     wordcloud = WordCloud(width=1600, height=1200, background_color='white', font_path=font_path).generate_from_frequencies(dict(top_keywords))
     plt.figure(figsize=(10, 5))
@@ -82,19 +82,19 @@ def plot_bar_chart(top_keywords):
             "data": [item["value"] for item in data]
         }]
     }
-    st_echarts(options, "600px")
+    st_echarts(options, 600)  # 注意这里传递的是整数
 
 def st_echarts(options, height):
-    echarts_js = """
+    echarts_js = f"""
+    <div id="chart" style="height: {height}px; width: 100%;"></div>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
-    <div id="chart" style="height: {height}; width: 100%;"></div>
     <script>
         var myChart = echarts.init(document.getElementById('chart'));
-        var option = {options};
+        var option = {json.dumps(options)};
         myChart.setOption(option);
     </script>
-    """.replace("{options}", json.dumps(options)).replace("{height}", height)
-    st.components.v1.html(echarts_js, height=height)
+    """
+    st.components.v1.html(echarts_js, height=f"{height}px")
 
 if __name__ == '__main__':
     main()
