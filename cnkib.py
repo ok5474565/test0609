@@ -82,11 +82,11 @@ def plot_bar_chart(top_keywords):
             "data": [item["value"] for item in data]
         }]
     }
-    st_echarts(options, 600)  # 注意这里传递的是整数
+    st_echarts(options)
 
-def st_echarts(options, height):
+def st_echarts(options):
     echarts_js = f"""
-    <div id="chart" style="height: {height}px; width: 100%;"></div>
+    <div id="chart" style="height: 600px; width: 100%;"></div>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
     <script>
         var myChart = echarts.init(document.getElementById('chart'));
@@ -94,7 +94,7 @@ def st_echarts(options, height):
         myChart.setOption(option);
     </script>
     """
-    st.components.html(echarts_js, height=f"{height}px")
+    st.write(echarts_js, dangerously_allow_html=True)
 
 if __name__ == '__main__':
     main()
